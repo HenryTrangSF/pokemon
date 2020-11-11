@@ -1,3 +1,19 @@
+html {
+    /* Rhythm and sizing */
+    --measure: 65ch;
+    --wrapper: 120ch; /* Defines the maximum width of the main area of the site */
+    --s000: 0.25rem;
+    --s100: 0.33rem;
+    --s200: 0.5rem;
+    --s300: 0.75rem;
+    --s400: 0.875rem;
+    --s500: 1rem;
+    --s600: 1.25rem;
+    --s700: 1.5rem;
+    --s800: 1.75rem;
+    --s900: 2rem;
+}
+
 /* Box sizing rules */
 *,
 *::before,
@@ -12,7 +28,7 @@ html {
 
 /* Set core root defaults */
 :root {
-  font-size: 1rem;
+  font-size: calc(var(--s500) + 0.33vw);
   font-family: sans-serif;
   line-height: calc(1ex / 0.32);
 }
@@ -90,4 +106,87 @@ img:not([alt]) {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* Centers the webpage */
+body > * {
+    margin: auto;
+}
+
+/* Progressive enhancement if the browser supports flexboxes */
+@supports (display: flex) {
+    html,
+    body {
+        display: flex;
+    }
+
+    html {
+        justify-content: center;
+    }
+
+    body {
+        flex-flow: column wrap;
+    }
+
+    body > * {
+        margin: unset;
+    }
+}
+
+/* Progressive enhancement if the browser supports grids */
+@supports (display: grid) {
+    html {
+        display: grid;
+        place-items: center;
+    }
+}
+
+/* TEMP */
+main {
+    max-width: 65ch;
+}
+
+/* Utility classes */
+.stack > * + * {
+    margin-top: var(--s500);
+}
+
+.grid {
+    display: flex;
+    flex-flow: column wrap;
+}
+
+.auto-fill-sm {
+    flex-flow: row wrap;
+}
+
+.gap200 > * {
+    margin: var(--s200);
+}
+
+.gap500 > * {
+    margin: var(--s500);
+}
+
+@supports (display: grid) {
+    .grid {
+        display: grid;
+    }
+
+    .auto-fill-sm {
+        grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+    }
+
+    .gap200 > *,
+    .gap500 > * {
+        margin: unset;
+    }
+
+    .gap200 {
+        gap: var(--s200);
+    }
+
+    .gap500 {
+        gap: var(--s500);
+    }
 }

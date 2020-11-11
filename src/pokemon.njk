@@ -1,0 +1,13 @@
+---
+title: Pokemon
+pagination:
+  data: pokemon
+  size: 1
+eleventyComputed:
+  title: "{{ pagination.name | capitalize }}"
+layout: layouts/default.njk
+permalink: "pokemon/{{ pagination.pageNumber + 1 }}/index.html"
+---
+{%- for pokemon in pagination.items -%}
+    <h1>{{ pokemon.name | capitalize }}</h1>
+{%- endfor -%}

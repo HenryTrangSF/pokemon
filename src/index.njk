@@ -1,0 +1,11 @@
+---
+title: Pokemon
+layout: layouts/default.njk
+---
+<ul class="[ pokedex ] [ grid auto-fill-sm gap200 ]">
+    {%- for pokemon in pokemon -%}
+        <li>
+            {{ pokemon.name | capitalize }}
+        </li>
+    {%- endfor -%}
+</ul>
