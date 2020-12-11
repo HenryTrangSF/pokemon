@@ -3,11 +3,32 @@ title: Pokemon
 pagination:
   data: pokemon
   size: 1
+  alias: pokemon
 eleventyComputed:
   title: "{{ pagination.name | capitalize }}"
 layout: layouts/default.njk
-permalink: "pokemon/{{ pagination.pageNumber + 1 }}/index.html"
+permalink: "pokemon/{{ pokemon.id }}/index.html"
 ---
-{%- for pokemon in pagination.items -%}
-    <h1>{{ pokemon.name | capitalize }}</h1>
+<h1>{{ pokemon.name | capitalize }}</h1>
+
+<img src="{{ pokemon.sprites.other['official-artwork'].front_default }}" alt="{{ pokemon.name | capitalize }}" loading="lazy" />
+
+<div>
+  {%- for type in pokemon.types -%}
+      <span class="[ type-{{ type.type.name }} ]">{{ type.type.name | capitalize }}</span>
+  {%- endfor -%}
+</div>
+
+<div>
+  <p><span>Height: </span>{{ pokemon.height / 10 }} meters</p>
+  <p><span>Weight: </span>{{ pokemon.weight / 10 }} kilograms</p>
+</div>
+
+{%- for stat in pokemon.stats -%}
+  <div>
+    <label for="{{ stat.stat.name | capitalize }}">{{ stat.stat.name | capitalize }}</label>
+    <meter id="{{ stat.stat.name | capitalize }}"
+      min="0" max="255"
+      value="{{ stat.base_stat }}">{{ stat.base_stat }}</meter>
+  </div>
 {%- endfor -%}

@@ -5,7 +5,7 @@ layout: layouts/default.njk
 <ul class="[ pokedex ] [ grid auto-fill-sm gap200 ]">
     {%- for pokemon in pokemon -%}
         <li>
-            {{ pokemon.name | capitalize }}
+            <a href="/pokemon/{{ pokemon.id }}">{{ pokemon.name | capitalize }}</a>
         </li>
     {%- endfor -%}
 </ul>
